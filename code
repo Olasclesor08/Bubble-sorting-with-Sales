@@ -1,0 +1,138 @@
+import time
+from BTCInput import *
+Sales = []
+#set the number of sales values that will be read
+
+def read_sales(no_of_sales):
+    Sales.clear()
+    # to clear out all existing values
+    for count in range(1,no_of_sales+1):
+        prompt = 'Enter sales for stand ' + str(count) + ':'
+        Sales.append(readfloat(prompt))
+    
+
+def print_sales():
+    print ("sales suprise")
+    count = 1
+    for value in Sales:
+        print('Sales for stand ',count, 'are', value)
+        time.sleep(1)
+        count = count+1
+read_sales(10)
+print_sales()
+print (Sales)
+
+
+def high_low():
+    'print out sales from high to low'
+    for sales in range (0,len(Sales)):
+         for count in range (0,len(Sales)-1-sales):
+              if Sales[count]<Sales[count+1]:
+                  temp = Sales[count]
+                  Sales[count]= Sales[count+1]
+                  Sales[count+1]=temp
+
+    time.sleep(1)
+    print_sales()
+
+
+def low_high():
+    'print out sales from low to high'
+    for sales in range (0,len(Sales)):
+        for count in range(0,len(Sales)-1-sales):
+            if Sales[count]>Sales[count+1]:
+                temp = Sales[count]
+                Sales[count]= Sales[count+1]
+                Sales[count+1]=temp
+    time.sleep(1)
+    print_sales()
+
+
+def highest_and_lowest():
+    'print out the highest and lowest value'
+    highest_value = Sales[0]
+    lowest_value = Sales[0]
+    for values in Sales:
+        if value >highest_value:
+            highest_value = value
+        if value < lowest_value:
+            lowest_value = value
+    print("The highest is: ", highest_value)
+    print('The lowest is: ', lowest_value)
+        
+
+
+def total_sales():
+    'print out the total sales'
+    total=0
+    for value in Sales:
+        total = total+value
+    print('The total is: ', total)
+
+        
+def average_sales():
+    total = 0
+    for value in Sales:
+        total = total+value
+    average_sales= total/len(Sales)
+    print('The average is: ', average_sales)
+
+file_path = ('file.txt')
+def save_sales(file_path):
+    ''' save the content of sales in a file_path'''
+    print("save the sales in: ", file_path)
+    try:
+        output_file=open(file_path,'w')
+        for value in Sales:
+            output_file.write(str(value)+'\n')
+        print('file written successfully')
+    except:
+        print('something went wrong writing the file')
+    finally:
+        output_file.close()
+
+def load_sales(file_path):
+    ''' loads the save sales from the file path'''
+    print('load the sales in: ',file_path)
+    sales.clear()
+    input_file=open(file_path,'r')
+    for line in input_file:
+        line=line.strip()
+        sales.append(int(line))
+    input_file.close()
+
+
+
+Menu = '''Ice cream Sales
+
+1. Print the sales
+2. Sort High to Low
+3. Sort Low to High
+4. Highest and Lowest
+5. Total Sales
+6. Average sales
+7. Enter Figures
+8. Save Sales
+9. Load Sales
+
+Enter your command: '''
+
+command = read_float_range(Menu,1,9)
+if command == 1:
+    print_sales()
+elif command == 2:
+    high_low()
+elif command == 3:
+    low_high()
+elif command == 4:
+    highest_and_lowest()
+elif command == 5:
+    total_sales()
+elif command == 6:
+    average_sales()
+elif command == 7:
+    read_sales(10)
+elif command == 8:
+    save_sales(file_path)
+elif command == 9:
+    load_sales(file_path)
