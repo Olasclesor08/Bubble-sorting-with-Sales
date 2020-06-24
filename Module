@@ -1,0 +1,98 @@
+import pydoc
+print('''Welcome to Our Theme park
+
+These are the available rides
+
+1. Scenic cruise
+2. carnival
+3. jungle splash
+4. roller coaster
+5. mountain run
+''')
+
+
+def get_value(prompt, value_min, value_max):
+    while True:
+        number_text = input(prompt)
+        try:
+            number = int(number_text)
+        except ValueError:
+            print('invalid number text. please enter digit.')
+            continue #return to the top of the loop
+        except KeyboardInterrupt:
+            print('please enter number')
+            continue
+        if number<value_min:
+            print('value too small')
+            print('The minimum value is',value_min)
+            continue
+        if number> value_max:
+            print('value too high')
+            print('The maximum value is',value_max)
+            continue
+        return number
+   
+
+ride_name = get_value(prompt = 'please enter the ride you want: ',value_min=1, value_max=5)
+
+print('you have selected ride: ', ride_name)
+
+if ride_name ==1:
+    print('you choose scenic cruise')
+if ride_name ==2:
+    print('you choose carnival')
+if ride_name ==3:
+    print('you choose jungle splash')
+if ride_name ==4:
+    print('You choose roller coaster')
+if ride_name ==5:
+    print('you choose mountain run')
+
+
+
+'''Here in the code written below we want get a value from user using functions
+and making the program inpossible to interrupt(Ctrl+c) and also setting a range
+for both minimum and maximum values
+invalid number are rejected
+'''
+
+def text_float(prompt):# declaring a function with one parameter
+    while True:#repeat forever
+        try:
+            result=input(prompt)
+            break
+        except KeyboardInterrupt:#making the program resisting interruption
+            print('please enter text')
+    return result
+
+def readfloat(prompt):
+    while True:#repeat forever
+        try:
+            number = text_float(prompt)
+            result=int(number)#read input value
+            break
+        except ValueError:
+            print('invalid number text. please enter digit.')
+            #press an invalid number
+            continue #return to the top of the loop
+    return result
+
+
+def read_float_range(prompt, value_min, value_max):#creating a function with 3 parameter
+    while True:#repeat forever
+        result = readfloat(prompt)
+        if result < value_min:#value entered too low
+            print('That number is too small')
+            print('The minimum value is',value_min)
+            continue
+        if result > value_max:#value entered too high
+            print('That number is too high')
+            print('The maximum value is',value_max)
+            continue
+        break#break out of the loop
+    
+    return result
+
+age= read_float_range('Please enter your age: ', value_min =1, value_max =65)
+
+print('This is your age: ',  age)
